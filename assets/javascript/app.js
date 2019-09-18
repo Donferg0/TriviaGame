@@ -57,9 +57,20 @@ $('#start').on('click', function () {
 })
 
 //create way to calculate correct and incorrect answers
-var correct = 0;
-var incorrect = 0;
-var counter = 60;
+
+var game = {
+    correct: 0,
+    incorrect: 0,
+    counter: 120,
+    countdown: function(){
+        game.counter--;
+        $('#counter').html(game.counter);
+        if(game.counter <= 0) {
+            console.log("Time is up!")
+            game.done();
+        }
+    }
+}
 
 var correctText = $("#correct");
 var incorrectText = $("#incorrect");
