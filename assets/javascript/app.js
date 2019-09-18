@@ -46,7 +46,11 @@ var questions = [{
 
 //when start is clicked, remove the start button and replace with questions/ set timer
 $('#start').on('click', function () {
-    game.start()
+    game.start();
+})
+
+$(document).on('click', '#end', function(){
+    game.done();
 })
 
 //create way to calculate correct and incorrect answers
@@ -54,7 +58,7 @@ $('#start').on('click', function () {
 var game = {
     correct: 0,
     incorrect: 0,
-    counter: 120,
+    counter: 60,
     countdown: function(){
         game.counter--;
         $('#counter').html(game.counter);
@@ -75,89 +79,82 @@ var game = {
             }
         }
         $('#lilwrapper').append("<br><button id='end'> END!</button>");
+    },
+
+    done: function() {
+        $.each($("input[name='question-0']:checked"), function () {
+            if($(this).val() == questions[0].Answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-1']:checked"), function () {
+            if($(this).val() == questions[1].Answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-2']:checked"), function () {
+            if($(this).val() == questions[2].Answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-3']:checked"), function () {
+            if($(this).val() == questions[3].Answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-4']:checked"), function () {
+            if($(this).val() == questions[4].Answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-5']:checked"), function () {
+            if($(this).val() == questions[5].Answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-6']:checked"), function () {
+            if($(this).val() == questions[6].Answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-7']:checked"), function () {
+            if($(this).val() == questions[7].Answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+
+        this.result();
+    },
+
+    result: function(){
+        clearInterval(timer);
+        $('#lilwrapper h2').remove();
+
+        $('#lilwrapper').html("<h2>Lets see if you're really a NBA fan!!</h2>");
+        $('#lilwrapper').append("<h3>Correct Answers: " + this.correct + "</h3>");
+        $('#lilwrapper').append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
+        $('#lilwrapper').append("<h3>Unanswered: " + (questions.length-(this.correct+this.incorrect)) + "</h3>")
     }
-}
-
-var correctText = $("#correct");
-var incorrectText = $("#incorrect");
-var unansweredText = $("#unanswered");
-
-// for(var i=0; i < questions.length) {
-//     var result
-
-    
-// }
-
-
-done = function() {
-    $.each($('input[name="question-0]":checked'), function() {
-        if($(this).val()===questions[0].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-    $.each($('input[name="question-1]":checked'), function() {
-        if($(this).val()===questions[1].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-    $.each($('input[name="question-2]":checked'), function() {
-        if($(this).val()===questions[2].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-    $.each($('input[name="question-3]":checked'), function() {
-        if($(this).val()===questions[3].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-    $.each($('input[name="question-4]":checked'), function() {
-        if($(this).val()===questions[4].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-    $.each($('input[name="question-5]":checked'), function() {
-        if($(this).val()===questions[5].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-    $.each($('input[name="question-6]":checked'), function() {
-        if($(this).val()===questions[6].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-    $.each($('input[name="question-7]":checked'), function() {
-        if($(this).val()===questions[7].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-    $.each($('input[name="question-8]":checked'), function() {
-        if($(this).val()===questions[8].Answer) {
-            correct++;
-        }else {
-            incorrect--;
-        }
-    });
-
 
 }
 
-//force the automute function present on Chrome to enable audio-- doesn't work :(
+//force the automute function present on Chrome to enable audio
 function unmute() {
     var vid = document.getElementById("myVideo");
     var aud = document.getElementById("myAudio");
