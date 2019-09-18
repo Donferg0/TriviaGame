@@ -46,14 +46,7 @@ var questions = [{
 
 //when start is clicked, remove the start button and replace with questions/ set timer
 $('#start').on('click', function () {
-    $('#start').remove();
-    for (var i = 0; i < questions.length; i++) {
-        $('#lilwrapper').append('<h3>' + questions[i].question + '</h3>');
-        for (a = 0; a < questions[i].answers.length; a++) {
-            $('#lilwrapper').append("<input type='radio' name='question" + i + "'value='" + questions[i].answers[a] + "'>" + questions[i].answers[a])        
-        }
-    }
-    $('#lilwrapper').append("<br><button id='end'> END!</button>");
+    game.start()
 })
 
 //create way to calculate correct and incorrect answers
@@ -69,6 +62,18 @@ var game = {
             console.log("Time is up!")
             game.done();
         }
+    },
+
+    start: function() {
+        timer = setInterval(game.countdown, 1000);
+        $('#start').remove();
+        for (var i = 0; i < questions.length; i++) {
+            $('#lilwrapper').append('<h3>' + questions[i].question + '</h3>');
+            for (a = 0; a < questions[i].answers.length; a++) {
+                $('#lilwrapper').append("<input type='radio' name='question" + i + "'value='" + questions[i].answers[a] + "'>" + questions[i].answers[a])        
+            }
+        }
+        $('#lilwrapper').append("<br><button id='end'> END!</button>");
     }
 }
 
